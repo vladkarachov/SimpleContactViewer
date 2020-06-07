@@ -1,33 +1,17 @@
 package com.example.testtask;
 
 import android.os.Bundle;
-
-import com.example.testtask.db.AppDatabase;
-import com.example.testtask.db.Contact;
-import com.example.testtask.db.ContactDao;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.example.testtask.db.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    public List<Contact> names=new ArrayList<>();
-    public ArrayList<String> contact_img=new ArrayList<>();
     public AppDatabase mDb;
-    //FirstFragment first;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, fragment).commit();
-
-      //  first.initRecyclerView(new ArrayList(names), contact_img, mDb, this);
-
     }
 
 
@@ -51,6 +32,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        menu.add("Reset Contacts");
+        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mDb.contactDao().deleteAll(AppDatabase.initSomeValues());
+                mDb.contactDao().insertAll(AppDatabase.initSomeValues());
+                FirstFragment fragment = new FirstFragment();
+                fragment.setArguments(getIntent().getExtras());
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment).commit();
+                return true;
+            }
+        });
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -66,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
