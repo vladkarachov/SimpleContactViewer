@@ -1,12 +1,6 @@
 package com.example.testtask;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Icon;
-import android.media.Image;
-import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +20,7 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
     private ArrayList<Contact> contactNames;
+    //картинок пока что нет
     private ArrayList<String> images;
     private Context mContext;
 
@@ -72,7 +67,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             contact_im=itemView.findViewById(R.id.contact_img);
-            //((ImageView )itemView.findViewById(R.id.contact_img)).setImageResource(R.id.contact_img);
             contact_name=itemView.findViewById(R.id.contact_name);
             relative_layout=itemView.findViewById(R.id.relative_layout);
 

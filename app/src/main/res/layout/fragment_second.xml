@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
@@ -15,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="21dp"
         android:layout_marginTop="225dp"
-        android:layout_x="9dp"
+        android:layout_x="3dp"
         android:layout_y="206dp"
         android:ems="10"
         android:inputType="textPersonName|text"
@@ -31,8 +30,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="21dp"
         android:layout_marginTop="139dp"
-        android:layout_x="5dp"
-        android:layout_y="113dp"
+        android:layout_x="-1dp"
+        android:layout_y="120dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -47,8 +46,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="23dp"
         android:layout_marginTop="309dp"
-        android:layout_x="8dp"
-        android:layout_y="295dp"
+        android:layout_x="0dp"
+        android:layout_y="289dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Email" />
@@ -63,8 +62,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="52dp"
-        android:layout_x="278dp"
-        android:layout_y="574dp"
+        android:layout_x="281dp"
+        android:layout_y="577dp"
         android:text="Save" />
 
     <Button
