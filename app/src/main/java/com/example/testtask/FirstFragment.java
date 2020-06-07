@@ -33,10 +33,7 @@ public class FirstFragment extends Fragment {
 
          View view = inflater.inflate(R.layout.fragment_first, container, false);
          MainActivity mainActivity = (MainActivity) getActivity();
-         //names = mainActivity.names;
-         //contact_img = mainActivity.contact_img;
          mDb = mainActivity.mDb;
-        //contactView = getView().findViewById(R.id.contacts_view);
         return view;
     }
     public void initContacts(){
