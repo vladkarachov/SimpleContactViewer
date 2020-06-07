@@ -18,6 +18,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="14dp"
         android:scaleType="fitStart"
+        app:srcCompat="@android:mipmap/sym_def_app_icon"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView

@@ -1,7 +1,9 @@
 package com.example.testtask;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.Layout;
@@ -14,9 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testtask.db.Contact;
@@ -26,7 +25,7 @@ import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
-    private ArrayList<Contact>  contactNames;
+    private ArrayList<Contact> contactNames;
     private ArrayList<String> images;
     private Context mContext;
 
@@ -45,20 +44,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.contact_name.setText(contactNames.get(position).name);
         final Contact item = contactNames.get(position);
 
         holder.relative_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment myFragment = new SecondFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.include, myFragment).addToBackStack(null).commit();
-
-
-
-                //todo onclick
+                AppCompatActivity activity = (AppCompatActivity) mContext;
+                SecondFragment myFragment = new SecondFragment();
+                myFragment.setContact(item);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
             }
         });
     }
@@ -75,8 +71,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         RelativeLayout relative_layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             contact_im=itemView.findViewById(R.id.contact_img);
+            //((ImageView )itemView.findViewById(R.id.contact_img)).setImageResource(R.id.contact_img);
             contact_name=itemView.findViewById(R.id.contact_name);
             relative_layout=itemView.findViewById(R.id.relative_layout);
 

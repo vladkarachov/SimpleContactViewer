@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,9 +24,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Contact> names=new ArrayList<>();
-    private ArrayList<String> contact_img=new ArrayList<>();
-    private AppDatabase mDb;
+    public List<Contact> names=new ArrayList<>();
+    public ArrayList<String> contact_img=new ArrayList<>();
+    public AppDatabase mDb;
+    //FirstFragment first;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,22 +36,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mDb = AppDatabase.getInstance(getApplicationContext());
-        initRecyclerView();
-        initContacts();
-    }
 
-    public void initContacts(){
-        names = mDb.contactDao().getAll();
-    }
+        FirstFragment fragment = new FirstFragment();
+        fragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, fragment).commit();
 
-    public void initRecyclerView(){
-        initContacts();
-        RecyclerView recyclerView = findViewById(R.id.contacts_view);
-        ContactAdapter adapter = new ContactAdapter(names, contact_img, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+      //  first.initRecyclerView(new ArrayList(names), contact_img, mDb, this);
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
