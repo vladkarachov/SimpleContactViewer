@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testtask.db.AppDatabase;
 import com.example.testtask.db.Contact;
@@ -32,6 +31,7 @@ public class SecondFragment extends Fragment {
         return this;
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        //set names in menu
         super.onViewCreated(view, savedInstanceState);
         final TextView nameField = getView().findViewById(R.id.editTextTextPersonName);
         nameField.setText(mContact.name);
@@ -42,8 +42,6 @@ public class SecondFragment extends Fragment {
         view.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
                 Fragment myFragment = new FirstFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
             }
@@ -62,7 +60,7 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
                 Fragment myFragment = new FirstFragment();
                 MainActivity activity = (MainActivity) getActivity();
-                Contact newContact = new Contact(mContact.id, ""+ nameField.getText(),  ""+  surnameField.getText(),  ""+  emailField.getText());
+                Contact newContact = new Contact(mContact.id, nameField.getText().toString(), surnameField.getText().toString(),  emailField.getText().toString());
                 mDb.contactDao().update(newContact);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
             }
